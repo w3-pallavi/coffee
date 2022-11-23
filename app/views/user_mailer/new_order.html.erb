@@ -1,0 +1,23 @@
+<p>Hello... Your order is placed successfully</p>
+<p><b>Order total: </b><%= @total %></p>
+<p><b>Product list</b></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Tax</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @order_items.each do |order_item| %>
+	    <tr>
+	      <td><%= order_item.item.name %></td>
+	      <td><%= order_item.item.price %></td>
+	      <td><%= order_item.quantity %></td>
+        <td><%= order_item.item.tax %></td>
+    <% end %>
+  </tbody>
+</table>

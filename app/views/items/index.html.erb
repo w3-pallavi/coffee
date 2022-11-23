@@ -1,0 +1,30 @@
+<%= button_to "Create Item", new_item_path, :method => :get if current_user&.admin? %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <% if current_user.present? && current_user.admin %>
+        <th scope="col">Tax</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @items.each do |item| %>
+	    <tr>
+	      <td><%= item.name %></td>
+	      <td><%= item.price %></td>
+        <td><%= item.tax if current_user.present? && current_user.admin? %></td>
+        <td>
+          <%= form_for @order_item do |f| %>
+            <%= f.hidden_field :item_id, :value => item.id %>
+            <%= f.number_field :quantity, :value => 1, :min => 1 %>
+            <%= f.submit "Add to Cart" %>
+          <% end %>
+        </td>
+	    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "Go to cart", carts_path %></p>

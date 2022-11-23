@@ -1,0 +1,71 @@
+<h1>Order Details</h1>
+<h1>New Item</h1>
+
+<%= form_for @order do |form| %>
+  <div>
+    <%= form.label :ship_to %><br>
+    <%= form.text_field :ship_to, required: true %>
+    <% @order.errors.full_messages_for(:ship_to).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :address1 %><br>
+    <%= form.text_field :address1, required: true %>
+    <% @order.errors.full_messages_for(:address1).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :address2 %><br>
+    <%= form.text_field :address2 %>
+    <% @order.errors.full_messages_for(:address2).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+    <% @order.errors.full_messages_for(:city).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+   </div>
+
+   <div>
+    <%= form.label :state %><br>
+    <%= form.text_field :state %>
+    <% @order.errors.full_messages_for(:state).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+   </div>
+
+   <div>
+    <%= form.label :country %><br>
+    <%= form.text_field :country %>
+    <% @order.errors.full_messages_for(:country).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+   </div>
+
+   <div>
+    <%= form.label :zipcode %><br>
+    <%= form.text_field :zipcode %>
+    <% @order.errors.full_messages_for(:zipcode).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+   </div>
+
+  <div>
+    <%= form.label :total %><br>
+    <%= form.text_field :total, readonly: true, value: 10 %>
+  </div>
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+
+  <div><br>
+    <%= form.submit "Place Order" %>
+  </div>
+<% end %><br><br>
+<%= link_to "Continue Shopping", root_path %>
+

@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  	<% @order_items.each do |order_item| %>
+	    <tr>
+	      <td><%= order_item.item.name %></td>
+	      <td><%= order_item.item.price %></td>
+        <td>
+          <%= form_for order_item do |f| %>
+            <%= f.hidden_field :id, :value => order_item.id %>
+            <%= f.number_field :quantity, :value => order_item.quantity, :min => 1 %>
+            <%= f.submit "Update" %>
+          <% end %>
+        </td>
+        <td><%= link_to "Remove", order_item_path(order_item.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></td>
+	    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Continue Shopping", root_path %><br><br>
+<% if current_order.id.present? %> 
+  <%= link_to "Place Order", edit_order_path(current_order.id) %>
+<% else %>
+  <p>Your cart is empty</p> 
+<% end %>
